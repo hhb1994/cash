@@ -1,0 +1,76 @@
+extends layout
+
+block head
+    title= '酒店收银系统-前台'
+block title1
+    h2(align='center' style='color:#ffffff')
+        | 住客信息
+block sidebar
+    include sidebar1
+block content
+    table#tb.table.table-stripe
+        thead
+            tr
+                th(style='display:none')
+                    | ID
+                th
+                    | 姓名
+                th
+                    | 房间类型
+                th
+                    | 身份证号
+                th
+                    | 电话
+                th
+                    | 入住日期
+                th
+                    | 离店日期
+                th
+                    | 房费金额
+                th
+                    | 押金金额
+                th
+                    | 操作人
+                th
+                    | 状态
+                th
+                    | 结账
+        tbody
+            tbody
+                each guest in guests
+                    tr(class='#{guest.class}')
+                        td(style='display:none') #{guest.gid}
+                        td #{guest.guest_name}
+                        td #{guest.guest_room_type}
+                        td #{guest.guest_id}
+                        td #{guest.guest_tel}
+                        td #{guest.guest_in}
+                        td #{guest.guest_out}
+                        td #{guest.guest_pay_a}
+                        td #{guest.guest_pay_b}
+                        td #{guest.guest_do}
+                        td #{guest.guest_ste}
+                        td
+                            button.btn.btn-sm.deal( style='background:#576f95;color:#ffffff' data-toggle='modal' data-target='#modal5')
+                                | 结账
+    script(type='text/javascript').
+        $(document).ready(function () {
+
+            $(".deal").click(function () {
+                var deal_id = $(this).parents('tr').children('td').html();
+                var deal_date = $(this).parents('tr').children('td').next('td').next('td').next('td').next('td').next('td').next('td').html();
+                var deal_type = $(this).parents('tr').children('td').next('td').next('td').html();
+                var deal_pay_b = $(this).parents('tr').children('td').next('td').next('td').next('td').next('td').next('td').next('td').next('td').next('td').html();
+                var deal_pay_a = $(this).parents('tr').children('td').next('td').next('td').next('td').next('td').next('td').next('td').next('td').html();
+                var ste = $(this).parents('tr').children('td').next('td').next('td').next('td').next('td').next('td').next('td').next('td').next('td').next('td').next('td').html();
+                $('.e1').val(deal_date);
+                $('.e2').val(deal_type);
+                $('.e3').val(deal_pay_b);
+                $('.e4').val(deal_pay_a);
+                $('.e5').val(deal_id);
+                if (ste == '已结账'){
+                    alert('此客户已结账!');
+                    window.location.href = 'manage2';
+                }
+            });
+        })

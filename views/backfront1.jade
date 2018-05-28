@@ -1,0 +1,29 @@
+extends layout
+
+block head
+    title= '酒店收银系统-后台'
+block title1
+    h2(align='center' style='color:#ffffff')
+        | 收入查询
+block sidebar
+    include sidebar2
+block content
+    table#tb.table.table-stripe
+        thead
+            tr
+                th(style='display:none')
+                    | ID
+                th
+                    | 消费日期
+                th
+                    | 消费类型
+                th
+                    | 消费金额
+        tbody
+            each sell in sells
+                tr(class='#{sell.class}')
+                    td(style='display:none') #{sell.ciid}
+                    td #{sell.cash_in_date}
+                    td #{sell.cash_in_type}
+                    td #{sell.cash_in_amount}
+

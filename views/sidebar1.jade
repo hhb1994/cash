@@ -1,0 +1,27 @@
+h3(align='center' style='color:#576f95')
+    | 信息管理
+hr
+button.btn.btn-default.btn-block#a1(style='background:#576f95;color:#ffffff')
+    | 客房信息查询
+button.btn.btn-default.btn-block#a2(style='background:#576f95;color:#ffffff')
+    | 住客信息查询
+button.btn.btn-default.btn-block#a3(style='background:#576f95;color:#ffffff')
+    | 商品信息查询
+hr
+
+button.btn.btn-danger.btn-block#a4
+    | 注销
+script(type='text/javascript').
+    $('#a1').click(function () {
+        window.location.href = 'manage1'
+    });
+    $('#a2').click(function () {
+        window.location.href = 'manage2'
+    });
+    $('#a3').click(function () {
+        window.location.href = 'manage3'
+    });
+
+    $('#a4').click(function () {
+        window.location.href = 'login'
+    });

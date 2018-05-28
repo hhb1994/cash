@@ -1,0 +1,27 @@
+h3(align='center' style='color:#576f95')
+    | 信息查询
+button.btn.btn-default.btn-block#a1(style='background:#576f95;color:#ffffff')
+    | 收入记录查询
+button.btn.btn-default.btn-block#a2(style='background:#576f95;color:#ffffff')
+    | 支出记录查询
+
+hr
+h3(align='center' style='color:#576f95')
+    | 操作
+button.btn.btn-default.btn-block(style='background:#576f95;color:#ffffff' data-toggle='modal' data-target='#modal4')
+    | 记录转账信息
+
+hr
+button.btn.btn-danger.btn-block#a4
+    | 注销
+script(type='text/javascript').
+    $('#a1').click(function () {
+        window.location.href = 'backfront1'
+    });
+    $('#a2').click(function () {
+        window.location.href = 'backfront2'
+    });
+
+    $('#a4').click(function () {
+        window.location.href = 'login'
+    });

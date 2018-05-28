@@ -1,0 +1,687 @@
+doctype html
+html
+  head
+    //网页标题继承
+    block head
+    //公共脚本引用
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap-datetimepicker.min.css')
+    script(type='text/javascript' src='/javascripts/jquery-3.2.1.min.js')
+    script(type='text/javascript' src='/javascripts/bootstrap-datetimepicker.min.js')
+    script(type='text/javascript'  src='/javascripts/bootstrap-datetimepicker.zh-CN.js')
+    script(type='text/javascript'  src='/javascripts/jquery.tabletojson.js' )
+    link(rel="stylesheet" type="text/css" href="DataTables-1.10.15/media/css/jquery.dataTables.css")
+    link(rel='stylesheet' type="text/css" href='/bootstrap-3.3.7-dist/css/bootstrap.min.css')
+    script(src='/bootstrap-3.3.7-dist/js/bootstrap.min.js')
+    script(type="text/javascript" charset="utf8" src="DataTables-1.10.15/media/js/jquery.dataTables.js")
+  body(style='background:#f0f0f0')
+    .navbar.navbar-default(style='background:#47546f;display:flex;justify-content:center;border-radius:0;border:1px')
+      h1(style='color:#ffffff')
+        | 酒店客房管理系统
+    .col-md-3(style='margin:0;padding:0')
+      //侧边栏
+      .panel-default
+        .panel-heading(style='background:#576F95;border:1px')
+          h2(align='center' style='color:#ffffff')
+            | 操作
+        .panel-body(style='background:#b3b4b7;')
+          block sidebar
+
+    .col-md-9(style='padding-right:0;padding-left:20px')
+      .panel-default
+        .panel-heading(style='background:#576f95;border:1px')
+          block title1
+        .panel-body(style='background:#b3b4b7')
+          block content
+.mode#modal1(tabindex='-1' role='dialog' aria-labelledby="label2"
+aria-hidden="true" class='modal fade' style='width:auto')
+    .modal-dialog
+        .modal-content(style='border-radius:0')
+            .modal-header(style='background:#576f95')
+                h4.modal-title#label1(style='color:#ffffff')
+                    | 新增一条入住信息
+            .modal-body(style='border-radius:0')
+                form.form-horizontal(role='form')
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95')
+                            | 姓名:
+                        .col-sm-6
+                            input.form-control.a1(type='text')
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95')
+                            | 房间类型：
+                        .col-sm-6
+                            input.form-control.a2(type='text' readonly)
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95')
+                            | 房间剩余数量：
+                        .col-sm-6
+                            input.form-control.left(type='text' readonly)
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95')
+                            | 身份证号：
+                        .col-sm-6
+                            input.form-control.a3(type='text')
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95')
+                            | 联系电话：
+                        .col-sm-6
+                            input.form-control.a4(type='text')
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95')
+                            | 入住日期：
+                        .col-sm-6
+                            input.form-control.input-datetime.a5(type='text' placeholder='点击来选择时间' readonly)
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95')
+                            | 离店日期：
+                        .col-sm-6
+                            input.form-control.input-datetime.a6(type='text' placeholder='点击来选择时间' readonly)
+
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95')
+                            | 房费金额：
+                        .col-sm-6
+                            input.form-control.a7(type='text')
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95')
+                            | 押金金额：
+                        .col-sm-6
+                            input.form-control.a8(type='text')
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95')
+                            | 操作人：
+                        .col-sm-6
+                            input.form-control.a9(type='text')
+
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95')
+                            | 备注：
+                        .col-sm-6
+                            textarea.form-control.a10
+
+            .modal-footer
+                button.btn.btn-default(data-dismiss="modal" type='button')
+                    | 取消
+                button.btn.btn-default#b1(type='button' style='background:#576f95;color:#ffffff')
+                    | 提交
+.mode#modal2(tabindex='-1' role='dialog' aria-labelledby="label2"
+aria-hidden="true" class='modal fade' style='width:auto')
+    .modal-dialog
+        .modal-content(style='border-radius:0')
+            .modal-header(style='background:#576f95')
+                h4.modal-title#label2(style='color:#ffffff')
+                    | 新增一条商品销售信息
+            .modal-body(style='border-radius:0')
+                form.form-horizontal(role='form')
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95')
+                            | 日期：
+                        .col-sm-6
+                            input.form-control.input-datetime.b1(type='text' placeholder='点击来选择时间' readonly)
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95')
+                            | 商品名称：
+                        .col-sm-6
+                            input.form-control.b2(readonly type='text')
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95')
+                            | 商品总数：
+                        .col-sm-6
+                            input.form-control.sell_amount(readonly type='text')
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95')
+                            | 购买数量：
+                        .col-sm-6
+                            select.form-control.b3
+                                option(value='1' )
+                                    | 1
+                                option(value='2')
+                                    | 2
+                                option(value='3')
+                                    | 3
+                                option(value='4')
+                                    | 4
+                                option(value='5')
+                                    | 5
+                                option(value='6')
+                                    | 6
+                                option(value='7')
+                                    | 7
+                                option(value='8')
+                                    | 8
+                                option(value='9')
+                                    | 9
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95')
+                            | 总价：
+                        .col-sm-6
+                            input.form-control.b4(type='text')
+
+            .modal-footer
+                button.btn.btn-default(data-dismiss="modal" type='button')
+                    | 取消
+                button.btn.btn-default#b2(type='button' style='background:#576f95;color:#ffffff')
+                    | 提交
+.mode#modal3(tabindex='-1' role='dialog' aria-labelledby="label2"
+aria-hidden="true" class='modal fade' style='width:auto')
+    .modal-dialog
+        .modal-content(style='border-radius:0')
+            .modal-header(style='background:#576f95')
+                h4.modal-title#label3(style='color:#ffffff')
+                    | 新增入库信息
+            .modal-body(style='border-radius:0')
+                form.form-horizontal(role='form')
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95')
+                            | 日期：
+                        .col-sm-6
+                            input.form-control.input-datetime.c1(type='text' placeholder='点击来选择时间' readonly)
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95')
+                            | 商品名称：
+                        .col-sm-6
+                            input.form-control.c2(type='text')
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95' type ='number')
+                            | 现有数量：
+                        .col-sm-6
+                            input.form-control.total(type='text')
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95' type ='number')
+                            | 添加数量：
+                        .col-sm-6
+                            input.form-control.c3(type='text')
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95')
+                            | 总花销：
+                        .col-sm-6
+                            input.form-control.c4(type='text')
+
+            .modal-footer
+                button.btn.btn-default(data-dismiss="modal" type='button')
+                    | 取消
+                button.btn.btn-default#b3(type='button' style='background:#576f95;color:#ffffff')
+                    | 入库
+.mode#modal4(tabindex='-1' role='dialog' aria-labelledby="label2"
+aria-hidden="true" class='modal fade' style='width:auto')
+    .modal-dialog
+        .modal-content(style='border-radius:0')
+            .modal-header(style='background:#576f95')
+                h4.modal-title#label4(style='color:#ffffff')
+                    | 新增转账信息
+            .modal-body(style='border-radius:0')
+                form.form-horizontal(role='form')
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95')
+                            | 日期：
+                        .col-sm-6
+                            input.form-control.input-datetime.d1(type='text' placeholder='点击来选择时间' readonly)
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95')
+                            | 转账对象：
+                        .col-sm-6
+                            input.form-control.d2(type='text')
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95')
+                            | 总花销：
+                        .col-sm-6
+                            input.form-control.d3(type='text')
+
+            .modal-footer
+                button.btn.btn-default(data-dismiss="modal" type='button')
+                    | 取消
+                button.btn.btn-default#b4(type='button' style='background:#576f95;color:#ffffff')
+                    | 确认
+.mode#modal5(tabindex='-1' role='dialog' aria-labelledby="label2"
+aria-hidden="true" class='modal fade' style='width:auto')
+    .modal-dialog
+        .modal-content(style='border-radius:0')
+            .modal-header(style='background:#576f95')
+                h4.modal-title#label5(style='color:#ffffff')
+                    | 结账
+            .modal-body(style='border-radius:0')
+                form.form-horizontal(role='form')
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95')
+                            | 日期：
+                        .col-sm-6
+                            input.e1.form-control(type='text' readonly)
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95')
+                            | 房型：
+                        .col-sm-6
+                            input.form-control.e2(type='text' readonly)
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95')
+                            | 押金金额：
+                        .col-sm-6
+                            input.form-control.e3(type='text')
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95')
+                            | 房费金额：
+                        .col-sm-6
+                            input.form-control.e4(type='text')
+                    .form-group(style='display:none')
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95')
+                            | ID：
+                        .col-sm-6
+                            input.form-control.e5(type='text')
+
+            .modal-footer
+                button.btn.btn-default(data-dismiss="modal" type='button')
+                    | 取消
+                button.btn.btn-default#b5(type='button' style='background:#576f95;color:#ffffff')
+                    | 确认
+.mode#modal6(tabindex='-1' role='dialog' aria-labelledby="label2"
+aria-hidden="true" class='modal fade' style='width:auto')
+    .modal-dialog
+        .modal-content(style='border-radius:0')
+            .modal-header(style='background:#576f95')
+                h4.modal-title#label6(style='color:#ffffff')
+                    | 新增房间信息
+            .modal-body(style='border-radius:0')
+                form.form-horizontal(role='form')
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95')
+                            | 房间名称：
+                        .col-sm-6
+                            input.form-control.f1(type='text')
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95')
+                            | 现有数量：
+                        .col-sm-6
+                            input.form-control.f2(type='number')
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95')
+                            | 添加数量：
+                        .col-sm-6
+                            input.form-control.f3(type='number')
+            .modal-footer
+                button.btn.btn-default(data-dismiss="modal" type='button')
+                    | 取消
+                button.btn.btn-default#b6(type='button' style='background:#576f95;color:#ffffff')
+                    | 确认
+  script(type='text/javascript').
+      $(document).ready(function () {
+          //table插件
+          $('#tb').DataTable({
+              "oLanguage": {
+                  "oAria": {
+                      "sSortAscending": " - click/return to sort ascending",
+                      "sSortDescending": " - click/return to sort descending"
+                  },
+                  "sLengthMenu": "显示 _MENU_ 记录",
+                  "sZeroRecords": "对不起，查询不到任何相关数据",
+                  "sEmptyTable": "未查询到相关数据",
+                  "sLoadingRecords": "正在加载数据-请等待...",
+                  "sInfo": "当前显示 _START_ 到 _END_ 条，共 _TOTAL_ 条记录。",
+                  "sInfoEmpty": "当前显示0到0条，共0条记录",
+                  "sInfoFiltered": "（数据库中共为 _MAX_ 条记录）",
+                  "sProcessing": "<img src='../resources/user_share/row_details/select2-spinner.gif'/> 正在加载数据...",
+                  "sSearch": "模糊查询：",
+                  "sUrl": "",
+                  "oPaginate": {
+                      "sFirst": "首页",
+                      "sPrevious": " 上一页 ",
+                      "sNext": " 下一页 ",
+                      "sLast": " 尾页 "
+                  }
+              }
+
+          });
+          //日期插件(date)：yyyy-mm-dd
+          $(".input-datetime").datetimepicker({
+              language: 'zh-CN',
+              format: 'yyyy-mm-dd',
+              autoclose: 'true',
+              minView: 'month',
+              todayBtn: 'true',
+              todayHighlight: 'true',
+              pickerPosition: 'top-right'
+          });
+          //日期插件(datetime):yyyy-mm-dd hh:mm:ss
+          $(".input-datetime-detail").datetimepicker({
+              language: 'zh-CN',
+              format: 'yyyy-mm-dd hh:mm:ss',
+              autoclose: 'true',
+              minView: 'hour',
+              todayBtn: 'true',
+              todayHighlight: 'true',
+              pickerPosition: 'top-right'
+          });
+          // 写入住客信息,房费入账,押金入账
+          $("#b1").click(function () {
+              var guest_name = $(".a1");
+              var guest_room_type = $(".a2");
+              var guest_id = $(".a3");
+              var guest_tel = $(".a4");
+              var guest_in = $(".a5");
+              var guest_out = $(".a6");
+              var guest_pay_a = $(".a7");
+              var guest_pay_b = $(".a8");
+              var guest_do = $(".a9");
+              var guest_note = $(".a10");
+              if (guest_name.val() == '' || guest_room_type.val() == '' ||
+                  guest_id.val() == '' || guest_tel.val() == '' || guest_in.val() == ''
+              || guest_out.val() == '' || guest_pay_a.val() == '' || guest_pay_b.val() == ''
+              || guest_do.val() == '') {
+                  alert('信息不能为空!')
+              }
+              else
+                  if(confirm('确认提交信息?'))
+                  {
+                      // 写入住客信息
+                      $.ajax({
+                          url: 'manage1/manage1post',
+                          data: {
+                              guest_name : guest_name.val(),
+                              guest_room_type : guest_room_type.val(),
+                              guest_id : guest_id.val(),
+                              guest_tel : guest_tel.val(),
+                              guest_in : guest_in.val(),
+                              guest_out : guest_out.val(),
+                              guest_pay_a : guest_pay_a.val(),
+                              guest_pay_b : guest_pay_b.val(),
+                              guest_do : guest_do.val(),
+                              guest_note : guest_note.val()
+                          },
+                          type: 'POST',
+                          timeout: 36000,
+                          dataType: 'text',
+                          success: function (data, textStatus) {
+                              var dataJson = eval("(" + data + ")");
+                              console.log(dataJson);
+                              if (dataJson.code == 200) {
+                                  alert('数据已成功写入!');
+
+                              }
+                              else {
+                                  alert('数据写入失败，请重新填写信息！')
+                              }
+                          }
+                      });
+                      // 写入房费
+                      $.ajax({
+                          url: 'manage2/manage2post1',
+                          data: {
+                              guest_in_date: guest_in.val(),
+                              guest_pay_a: guest_pay_a.val(),
+                          },
+                          type: 'POST',
+                          timeout: 36000,
+                          dataType: 'text',
+                          success: function (data, textStatus) {
+                              var dataJson = eval("(" + data + ")");
+                              console.log(dataJson);
+                              if (dataJson.code == 200) {
+                                  console.log('数据已成功写入!')
+                              }
+                              else {
+                                  alert('数据写入失败，请重新填写信息！')
+                              }
+                          }
+                      });
+                      // 写入押金信息
+                      $.ajax({
+                          url: 'manage2/manage2post2',
+                          data: {
+                              guest_in_date: guest_in.val(),
+                              guest_pay_b: guest_pay_b.val(),
+                          },
+                          type: 'POST',
+                          timeout: 36000,
+                          dataType: 'text',
+                          success: function (data, textStatus) {
+                              var dataJson = eval("(" + data + ")");
+                              console.log(dataJson);
+                              if (dataJson.code == 200) {
+                                  console.log('数据已成功写入!')
+                              }
+                              else {
+                                  alert('数据写入失败，请重新填写信息！')
+                              }
+                          }
+                      });
+                      // 房间数量改变
+                      $.ajax({
+                          url: 'manage2/manage2post3',
+                          data: {
+                              room_type: $('.a2').val(),
+                              room_amount: $('.left').val()
+                          },
+                          type: 'POST',
+                          timeout: 36000,
+                          dataType: 'text',
+                          success: function (data, textStatus) {
+                              var dataJson = eval("(" + data + ")");
+                              console.log(dataJson);
+                              if (dataJson.code == 200) {
+                                  console.log('数据已成功写入!');
+                                  window.location.href ='manage1';
+                              }
+                              else {
+                                  alert('数据写入失败，请重新填写信息！')
+                              }
+                          }
+                      });
+
+                  }
+
+          });
+          // 商品购买入账
+          $("#b2").click(function () {
+              if ($(".b1").val() == "" || $(".b4").val() == ""){
+                  alert ('请输入完整信息!')
+              }
+              else
+              {     // 商品购买历史纪录
+                  $.ajax({
+                      url: 'manage3/manage3post1',
+                      data: {
+                          guest_in_date: $(".b1").val(),
+                          guest_pay: $(".b4").val()
+                      },
+                      type: 'POST',
+                      timeout: 36000,
+                      dataType: 'text',
+                      success: function (data, textStatus) {
+                          var dataJson = eval("(" + data + ")");
+                          console.log(dataJson);
+                          if (dataJson.code == 200) {
+                              alert('购买成功!')
+                          }
+                          else {
+                              alert('数据写入失败，请重新填写信息！')
+                          }
+                      }
+                  });
+                  //商品数量改变
+                  $.ajax({
+                      url: 'manage3/manage3post1_1',
+                      data: {
+                          sell_name: $(".b2").val(),
+                          sell_amount_a: $(".sell_amount").val(),
+                          sell_amount_b: $(".b3").val()
+                      },
+                      type: 'POST',
+                      timeout: 36000,
+                      dataType: 'text',
+                      success: function (data, textStatus) {
+                          var dataJson = eval("(" + data + ")");
+                          console.log(dataJson);
+                          if (dataJson.code == 200) {
+                              console.log('购买成功!')
+                          }
+                          else {
+                              alert('数据写入失败，请重新填写信息！')
+                          }
+                      }
+                  });
+              }
+          });
+          // 新增入库信息
+          $("#b3").click(function () {
+              if ($(".c1").val() == "" || $(".c4").val() == "" || $(".c2").val() == "" || $(".c3").val() == "") {
+                  alert('请输入完整信息!')
+              }
+              else {
+                  //入库信息入账
+                  $.ajax({
+                      url: 'manage3/manage3post2',
+                      data: {
+                          guest_out_date: $(".c1").val(),
+                          guest_pay: $(".c4").val()
+                      },
+                      type: 'POST',
+                      timeout: 36000,
+                      dataType: 'text',
+                      success: function (data, textStatus) {
+                          var dataJson = eval("(" + data + ")");
+                          console.log(dataJson);
+                          if (dataJson.code == 200) {
+                              alert('入库成功!')
+                          }
+                          else {
+                              alert('数据写入失败，请重新填写信息！')
+                          }
+                      }
+                  });
+                  //入库商品数量改变
+                  $.ajax({
+                      url: 'manage3/manage3post2_1',
+                      data: {
+                          sell_name: $(".c2").val(),
+                          sell_amount_1: $(".total").val(),
+                          sell_amount_2: $(".c3").val()
+                      },
+                      type: 'POST',
+                      timeout: 36000,
+                      dataType: 'text',
+                      success: function (data, textStatus) {
+                          var dataJson = eval("(" + data + ")");
+                          console.log(dataJson);
+                          if (dataJson.code == 200) {
+                              console('入库成功!');
+                              window.location.href = 'manage2';
+                          }
+                          else {
+                              alert('数据写入失败，请重新填写信息！')
+                          }
+                      }
+                  });
+              }
+          });
+
+          //新增转账信息
+          $("#b4").click(function () {
+              if ($(".d1").val() == "" || $(".d2").val() == "" || $(".d3").val() == "") {
+                  alert('请输入完整信息!')
+              }
+              else {
+                  $.ajax({
+                      url: 'manage3/manage3post3',
+                      data: {
+                          d1: $(".d1").val(),
+                          d2: $(".d2").val(),
+                          d3: $(".d3").val()
+                      },
+                      type: 'POST',
+                      timeout: 36000,
+                      dataType: 'text',
+                      success: function (data, textStatus) {
+                          var dataJson = eval("(" + data + ")");
+                          console.log(dataJson);
+                          if (dataJson.code == 200) {
+                              alert('转账信息记录成功!')
+                          }
+                          else {
+                              alert('数据写入失败，请重新填写信息！')
+                          }
+                      }
+                  });
+              }
+          });
+          // 结账信息记录
+          $("#b5").click(function () {
+              if ($(".e1").val() == "" || $(".e2").val() == "" || $(".e3").val() == "") {
+                  alert('请输入完整信息!')
+              }
+              else {
+                  if(confirm('确认提交退房信息?')){
+                      $.ajax({
+                          url: 'manage3/manage3post4',
+                          data: {
+                              e1: $(".e1").val(),
+                              e2: $(".e2").val(),
+                              e3: $(".e3").val()
+                          },
+                          type: 'POST',
+                          timeout: 36000,
+                          dataType: 'text',
+                          success: function (data, textStatus) {
+                              var dataJson = eval("(" + data + ")");
+                              console.log(dataJson);
+                              if (dataJson.code == 200) {
+                                  alert('结账信息记录成功!')
+                              }
+                              else {
+                                  alert('数据写入失败，请重新填写信息！')
+                              }
+                          }
+                      });
+                      //修改房间数量
+                      $.ajax({
+                          url: 'manage3/manage3post5',
+                          data: {
+                              e5: $(".e5").val()
+                          },
+                          type: 'POST',
+                          timeout: 36000,
+                          dataType: 'text',
+                          success: function (data, textStatus) {
+                              var dataJson = eval("(" + data + ")");
+                              console.log(dataJson);
+                              if (dataJson.code == 200) {
+                                  console.log('success');
+                                  window.location.href = 'manage2';
+                              }
+                              else {
+                                  alert('数据写入失败，请重新填写信息！')
+                              }
+                          }
+                      });
+                  };
+              };
+          });
+          $("#b6").click(function () {
+              if ($(".f3").val() == "") {
+                  alert('请输入完整信息!')
+              }
+              else {
+                  //增加房间数量
+                  $.ajax({
+                      url: 'manage3/manage3post6',
+                      data: {
+                          f1: $(".f1").val(),
+                          f2: $(".f2").val(),
+                          f3: $(".f3").val()
+                      },
+                      type: 'POST',
+                      timeout: 36000,
+                      dataType: 'text',
+                      success: function (data, textStatus) {
+                          var dataJson = eval("(" + data + ")");
+                          console.log(dataJson);
+                          if (dataJson.code == 200) {
+                              alert('添加成功!');
+                              window.location.href = 'manage1';
+                          }
+                          else {
+                              alert('数据写入失败，请重新填写信息！')
+                          }
+                      }
+                  });
+              };
+          });
+      })

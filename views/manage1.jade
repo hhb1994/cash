@@ -1,0 +1,61 @@
+extends layout
+
+block head
+    title= '酒店收银系统-前台'
+block title1
+    h2(align='center' style='color:#ffffff')
+        | 客房信息
+block sidebar
+    include sidebar1
+block content
+    table#tb.table.table-stripe
+        thead
+            tr
+                th(style='display:none')
+                    | ID
+                th
+                    | 房间类型
+                th
+                    | 房间剩余数量
+                th
+                    | 价格
+                th
+                    | 预订
+                th
+                    | 增加
+        tbody
+            each room in rooms
+                tr(class='#{room.class}')
+                    td(style='display:none') #{room.rid}
+                    td #{room.room_type}
+                    td.amount #{room.room_amount}
+                    td #{room.room_price}
+                    td
+                        button.btn.btn-sm.change(style='background:#576f95;color:#ffffff' data-toggle='modal' data-target='#modal1')
+                            | 预订
+                    td
+                        button.btn.btn-sm.add(style='background:#576f95;color:#ffffff' data-toggle='modal' data-target='#modal6')
+                            | 增加
+    script(type='text/javascript').
+        $(document).ready(function () {
+            $(".change").click(function () {
+                var room_type = $(this).parents('tr').children('td').next('td').html();
+                var room_amount = $(this).parents('tr').children('td').next('td').next('td').html();
+                if (room_amount == '0' || room_amount < '0'){
+                    alert('客房数量为0!');
+                    window.location.href = 'manage1';
+                }
+                else{
+                    $('.a2').val(room_type);
+                    $('.left').val(room_amount);
+                    $('.f1').val(room_type);
+                    $('.f2').val(room_amount);
+                };
+            });
+            $(".add").click(function () {
+                var room_type = $(this).parents('tr').children('td').next('td').html();
+                var room_amount = $(this).parents('tr').children('td').next('td').next('td').html();
+                $('.f1').val(room_type);
+                $('.f2').val(room_amount);
+            });
+        })

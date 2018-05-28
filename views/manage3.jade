@@ -1,0 +1,59 @@
+extends layout
+
+block head
+    title= '酒店收银系统-前台'
+block title1
+    h2(align='center' style='color:#ffffff')
+        | 商品信息信息
+block sidebar
+    include sidebar1
+block content
+    table#tb.table.table-stripe
+        thead
+            tr
+                th(style='display:none')
+                    | ID
+                th
+                    | 商品名
+                th
+                    | 商品剩余数量
+                th
+                    | 商品价格
+                th
+                    | 购买
+                th
+                    | 增加
+        tbody
+            each sell in sells
+                tr(class='#{sell.class}')
+                    td(style='display:none') #{sell.sid}
+                    td #{sell.sell_name}
+                    td #{sell.sell_amount}
+                    td #{sell.sell_price}
+                    td
+                        button.btn.btn-sm.sell(style='background:#576f95;color:#ffffff' data-toggle='modal' data-target='#modal2')
+                            | 购买
+                    td
+                        button.btn.btn-sm.in(style='background:#576f95;color:#ffffff' data-toggle='modal' data-target='#modal3')
+                            | 新增
+    script(type='text/javascript').
+        $(document).ready(function () {
+            $(".sell").click(function () {
+                var sell_name = $(this).parents('tr').children('td').next('td').html();
+                var sell_amount = $(this).parents('tr').children('td').next('td').next('td').html();
+                if (sell_amount == '0' || sell_amount < '0') {
+                    alert('商品数量为0!');
+                    window.location.href = 'manage3';
+                }
+                else {
+                    $('.b2').val(sell_name);
+                    $('.sell_amount').val(sell_amount);
+                };
+            });
+            $(".in").click(function () {
+                var sell_name = $(this).parents('tr').children('td').next('td').html();
+                var sell_amount = $(this).parents('tr').children('td').next('td').next('td').html();
+                $('.c2').val(sell_name);
+                $('.total').val(sell_amount);
+            });
+        })

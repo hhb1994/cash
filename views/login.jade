@@ -1,0 +1,84 @@
+doctype html
+html
+    head
+        title= 'login'
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        script(type='text/javascript' src='/javascripts/jquery-3.2.1.min.js')
+        link(rel='stylesheet', href='/bootstrap-3.3.7-dist/css/bootstrap.min.css')
+        script(src='/bootstrap-3.3.7-dist/js/bootstrap.min.js')
+    body(style='background:#a5a9b0')
+        .navbar.navbar-default(style='background:#47546f;display:flex;justify-content:center;border-radius:0;border:1px')
+            h3(style='color:#ffffff')
+                | 酒店客房管理系统登陆
+        .col-md-6.col-md-offset-3(style='margin-top:90px')
+            .panel-default
+                .panel-heading(style='background:#576f95;border:1px')
+                    h4(align='center' style='color:#ffffff')
+                        | 用户登陆
+                .panel-body(style='background:#b3b4b7')
+                    form.form-horizontal(role='form')
+                        .form-group
+                            label.col-sm-2.col-sm-offset-2.control-label(style='color:#576f95')
+                                | 账号：
+                            .col-sm-6
+                                input.form-control#username(type='text' placeholder='请输入账号' )
+                        .form-group
+                            label.col-sm-2.col-sm-offset-2.control-label(style='color:#576f95')
+                                | 密码：
+                            .col-sm-6
+                                input.form-control#userpwd(type='password' placeholder='请输入密码')
+                    hr
+                    .form-group(align='center')
+                        button.btn.btn-default.btn-block#a1(style='width:60%;color:#576f95')
+                            | 登陆
+
+
+    script(type='text/javascript').
+        $(document).ready(function () {
+            var username = $("#username");
+            var userpwd = $("#userpwd");
+            $('#a1').click(function () {
+                if (username.val() == '' || userpwd.val() == '')
+                {
+                    alert('账号与密码不能为空')
+                }
+                else {
+                    $.ajax({
+                        url: "/login/userlogin",
+                        data: {
+                            username: $("#username").val(),
+                            userpwd: $("#userpwd").val()
+                        },
+                        type: "POST",
+                        timeout: 36000,
+                        dataType: "text",
+                        success: function (data, textStatus) {
+                            var dataJson = eval("(" + data + ")");
+                            if (dataJson.lv == 1) {
+                                alert("欢迎登陆");
+                                window.location.href='manage1'
+                            }
+                            else if (dataJson.lv == 2) {
+                                alert("欢迎登陆,后台管理员!");
+                                window.location.href='backfront1'
+                            }
+                            else if (dataJson.code == 300) {
+                                alert("账号不存在，请重新输入！");
+                            }
+                            else if (dataJson.code == 400) {
+                                alert("密码有误，请重新输入！");
+                            } else {
+                                alert("登录出错！");
+                            }
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            alert("error:" + textStatus);
+                        }
+
+                    })
+                }
+
+
+            });
+        })
+
