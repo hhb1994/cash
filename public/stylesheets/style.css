@@ -6,3 +6,11 @@
 a {
   color: #00B7FF;
 }
+.box{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+}
+
+

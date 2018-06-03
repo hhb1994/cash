@@ -104,7 +104,7 @@ aria-hidden="true" class='modal fade' style='width:auto')
                 button.btn.btn-default(data-dismiss="modal" type='button')
                     | 取消
                 button.btn.btn-default#b1(type='button' style='background:#576f95;color:#ffffff')
-                    | 提交
+                    | 付款
 .mode#modal2(tabindex='-1' role='dialog' aria-labelledby="label2"
 aria-hidden="true" class='modal fade' style='width:auto')
     .modal-dialog
@@ -302,7 +302,37 @@ aria-hidden="true" class='modal fade' style='width:auto')
                     | 取消
                 button.btn.btn-default#b6(type='button' style='background:#576f95;color:#ffffff')
                     | 确认
-  script(type='text/javascript').
+.mode#modal7(tabindex='-1' role='dialog' aria-labelledby="label2"
+aria-hidden="true" class='modal fade' style='width:auto')
+    .modal-dialog
+        .modal-content(style='border-radius:0')
+            .modal-header(style='background:#576f95')
+                h4.modal-title#label7(style='color:#ffffff')
+                    | 请选择付款方式
+            .modal-body(style='border-radius:0')
+                form.form-horizontal(role='form')
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95')
+                            | 房间名称：
+                        .col-sm-6
+                            input.form-control(type='text')
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95')
+                            | 现有数量：
+                        .col-sm-6
+                            input.form-control(type='number')
+                    .form-group
+                        label.col-sm-3.col-sm-offset-1.control-label(style='color:#576f95')
+                            | 添加数量：
+                        .col-sm-6
+                            input.form-control(type='number')
+            .modal-footer
+                button.btn.btn-default(data-dismiss="modal" type='button')
+                    | 取消
+                button.btn.btn-default(type='button' style='background:#576f95;color:#ffffff')
+                    | 确认
+
+script(type='text/javascript').
       $(document).ready(function () {
           //table插件
           $('#tb').DataTable({
@@ -393,7 +423,7 @@ aria-hidden="true" class='modal fade' style='width:auto')
                               var dataJson = eval("(" + data + ")");
                               console.log(dataJson);
                               if (dataJson.code == 200) {
-                                  alert('数据已成功写入!');
+                                  alert('即将跳转到付款页面');
 
                               }
                               else {
@@ -458,7 +488,7 @@ aria-hidden="true" class='modal fade' style='width:auto')
                               console.log(dataJson);
                               if (dataJson.code == 200) {
                                   console.log('数据已成功写入!');
-                                  window.location.href ='manage1';
+                                  window.location.href ='pay';
                               }
                               else {
                                   alert('数据写入失败，请重新填写信息！')

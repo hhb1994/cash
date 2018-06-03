@@ -12,6 +12,7 @@ var manage2 = require('./routes/manage2');
 var manage3 = require('./routes/manage3');
 var backfront1 = require('./routes/backfront1');
 var backfront2 = require('./routes/backfront2');
+var pay = require('./routes/pay');
 
 var app = express();
 
@@ -33,6 +34,7 @@ app.use('/manage2', manage2);
 app.use('/manage3', manage3);
 app.use('/backfront1', backfront1);
 app.use('/backfront2', backfront2);
+app.use('/pay', pay);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
