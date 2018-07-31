@@ -6,6 +6,9 @@ html
         script(type='text/javascript' src='/javascripts/jquery-3.2.1.min.js')
         link(rel='stylesheet', href='/bootstrap-3.3.7-dist/css/bootstrap.min.css')
         script(src='/bootstrap-3.3.7-dist/js/bootstrap.min.js')
+        link(href='video-js-7.2.0/video-js.min.css', rel='stylesheet')
+        script(src='video-js-7.2.0/video.min.js')
+
     body(style='background:#a5a9b0')
         .navbar.navbar-default(style='background:#47546f;display:flex;justify-content:center;border-radius:0;border:1px')
             h3(style='color:#ffffff')
@@ -31,6 +34,10 @@ html
                     .form-group(align='center')
                         button.btn.btn-default.btn-block#a1(style='width:60%;color:#576f95')
                             | 登陆
+        video#my-player.video-js(controls='', preload='auto', poster='//vjs.zencdn.net/v/oceans.png', data-setup='{}')
+            source(src='rtmp://10.20.40.10/live/testzjwsyl', type='video/rtmp')
+            //source(src='//vjs.zencdn.net/v/oceans.ogv', type='video/ogg')
+
 
 
     script(type='text/javascript').
